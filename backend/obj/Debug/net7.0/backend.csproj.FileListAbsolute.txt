@@ -67,3 +67,4 @@ C:\Users\Eirik\Desktop\fullstack\examv2\backend\obj\Debug\net7.0\refint\backend.
 C:\Users\Eirik\Desktop\fullstack\examv2\backend\obj\Debug\net7.0\backend.pdb
 C:\Users\Eirik\Desktop\fullstack\examv2\backend\obj\Debug\net7.0\backend.genruntimeconfig.cache
 C:\Users\Eirik\Desktop\fullstack\examv2\backend\obj\Debug\net7.0\ref\backend.dll
+C:\Users\Eirik\Desktop\fullstack\examv2\backend\bin\Debug\net7.0\backend.staticwebassets.runtime.json
