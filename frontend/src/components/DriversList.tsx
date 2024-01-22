@@ -1,8 +1,18 @@
 import { useEffect, useState } from 'react';
 import DriversService from '../services/DriversService';
+import DriverItem from './DriverItem';
+
+export interface Driver {
+  id: number;
+  name: string;
+  age: number;
+  nationality: string;
+  image: string;
+}
 
 const DriversList = () => {
-  const [drivers, setDrivers] = useState([]);
+  const [drivers, setDrivers] = useState<Driver[]>([]);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     getDriversFromService();
@@ -14,12 +24,40 @@ const DriversList = () => {
     setDrivers(driversFromService);
   }
 
+  function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value);
+  }
+
+  const newDriverList = () => {
+    return drivers.filter((driver) =>
+      driver.name.toLowerCase().includes(search.toLowerCase())
+    );
+  };
+
   return (
     <>
-      <h1>Drivers</h1>
+      <label htmlFor="search" className="label">
+        Search:
+      </label>
+      <input
+        type="text"
+        id="search"
+        autoFocus
+        className="input"
+        onChange={handleSearch}
+      />
+      <p>{search}</p>
       <ul>
-        {drivers.map((driver) => (
-          <li key={driver.id}>{driver.name}</li>
+        <li className="item">
+          <span style={{ width: '40%', fontWeight: 'bold' }}>Name</span>
+          <span style={{ width: '30%', fontWeight: 'bold' }}>Nationality</span>
+          <span style={{ width: '10%', fontWeight: 'bold' }}>Age</span>
+          <span style={{ width: '10%', fontWeight: 'bold' }}>Image url</span>
+          <span style={{ width: '10%', fontWeight: 'bold' }}></span>
+        </li>
+        <hr />
+        {newDriverList().map((driver) => (
+          <DriverItem key={driver.id} driver={driver} />
         ))}
       </ul>
     </>
