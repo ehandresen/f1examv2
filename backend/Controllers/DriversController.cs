@@ -36,4 +36,60 @@ public class DriversController : ControllerBase
             return StatusCode(500); // Server error
         }
     }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Driver>> GetById(int id)
+    {
+        try
+        {
+            Driver? driver = await context.Drivers.FindAsync(id);
+
+            if (driver is null)
+                return NotFound($"Driver with id {id} not found");
+
+            return Ok(driver);
+        }
+        catch
+        {
+            return StatusCode(500);
+        }
+    }
+
+    [HttpGet]
+    [Route("[action]/{name}")]
+    public async Task<ActionResult<Driver>> GetByName(string name)
+    {
+        try
+        {
+
+            Driver? driver = await context.Drivers.FirstOrDefaultAsync(driver => driver.Name != null && driver.Name.ToLower().Contains(name.ToLower()));
+
+            if (driver is null)
+                return NotFound($"Driver with name containing '{name}' not found");
+
+            return Ok(driver);
+        }
+        catch
+        {
+            return StatusCode(500);
+        }
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> Post(Driver newDriver)
+    {
+        try
+        {
+            context.Drivers.Add(newDriver);
+
+            await context.SaveChangesAsync();
+
+            return NoContent();
+        }
+        catch
+        {
+            return StatusCode(500);
+        }
+    }
+
 }
