@@ -3,9 +3,10 @@ import { FC } from 'react';
 
 interface ItemProps {
   driver: Driver;
+  onRemove: (driver: Driver) => void;
 }
 
-const DriverItem: FC<ItemProps> = ({ driver }) => {
+const DriverItem: FC<ItemProps> = ({ driver, onRemove }) => {
   return (
     <li className="item">
       <span style={{ width: '40%' }}>{driver.name}</span>
@@ -13,7 +14,9 @@ const DriverItem: FC<ItemProps> = ({ driver }) => {
       <span style={{ width: '10%' }}>{driver.age}</span>
       <span style={{ width: '10%' }}>{driver.image}</span>
       <span style={{ width: '10%' }}>
-        <button className="button">Remove</button>
+        <button className="button" onClick={() => onRemove(driver)}>
+          Remove
+        </button>
       </span>
     </li>
   );

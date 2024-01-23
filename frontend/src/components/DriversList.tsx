@@ -34,6 +34,12 @@ const DriversList = () => {
     );
   };
 
+  const handleRemove = (item: Driver) => {
+    const newDriverList = drivers.filter((driver) => item.id !== driver.id);
+
+    setDrivers(newDriverList);
+  };
+
   return (
     <>
       <label htmlFor="search" className="label">
@@ -57,7 +63,7 @@ const DriversList = () => {
         </li>
         <hr />
         {newDriverList().map((driver) => (
-          <DriverItem key={driver.id} driver={driver} />
+          <DriverItem key={driver.id} driver={driver} onRemove={handleRemove} />
         ))}
       </ul>
     </>
