@@ -34,8 +34,8 @@ const DriverById = () => {
 
   return (
     <>
-      <label htmlFor="search">Search Id:</label>
-      <input type="text" onChange={handleChange} />
+      <label htmlFor="search-id">Search Id:</label>
+      <input type="text" id="search-id" onChange={handleChange} />
       <DriverItem driver={driver} />
     </>
   );

@@ -1,4 +1,5 @@
 import DriverById from './components/DriverById';
+import DriverByName from './components/DriverByName';
 import DriversList from './components/DriversList';
 
 function App() {
@@ -8,6 +9,8 @@ function App() {
       <DriversList />
       <hr />
       <DriverById />
+      <hr />
+      <DriverByName />
     </div>
   );
 }
