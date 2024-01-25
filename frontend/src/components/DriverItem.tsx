@@ -11,6 +11,14 @@ const DriverItem: FC<ItemProps> = ({ driver, onRemove }) => {
     // If driver is not found
     return <div>Driver not found</div>;
   }
+
+  const handleRemove = () => {
+    // Check if onRemove is defined before invoking it
+    if (onRemove) {
+      onRemove(driver);
+    }
+  };
+
   return (
     <li className="item">
       <span style={{ width: '40%' }}>{driver.name}</span>
@@ -18,7 +26,7 @@ const DriverItem: FC<ItemProps> = ({ driver, onRemove }) => {
       <span style={{ width: '10%' }}>{driver.age}</span>
       <span style={{ width: '10%' }}>{driver.image}</span>
       <span style={{ width: '10%' }}>
-        <button className="button" onClick={() => onRemove(driver)}>
+        <button className="button" onClick={handleRemove}>
           Remove
         </button>
       </span>

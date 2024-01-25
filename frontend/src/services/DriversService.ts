@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const DriversService = (() => {
-  const driversController = 'http://localhost:5155/api/drivers';
+  const driversController: string = 'http://localhost:5155/api/drivers';
 
   async function getAll() {
     const result = await axios.get(driversController);
@@ -15,11 +15,11 @@ const DriversService = (() => {
 
       console.log(result);
       return result.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response) {
         // Not in 200 response range
         console.log(error.response.data);
-        console.log(error.response.status);
       } else {
         console.log(`Error: ${error.message}`);
       }
