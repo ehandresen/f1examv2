@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
+import { Driver } from '../components/DriversList';
 
 const DriversService = (() => {
   const driversController: string = 'http://localhost:5155/api/drivers';
@@ -13,9 +15,7 @@ const DriversService = (() => {
     try {
       const result = await axios.get(`${driversController}/${id}`);
 
-      console.log(result);
       return result.data;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response) {
         // Not in 200 response range
@@ -32,7 +32,6 @@ const DriversService = (() => {
 
       console.log(result.data);
       return result.data;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response) {
         // Not in 200 response range
@@ -43,10 +42,37 @@ const DriversService = (() => {
     }
   }
 
+  async function addDriver(newDriver: Driver) {
+    try {
+      await axios.post(driversController, newDriver);
+
+      return {
+        success: true,
+        message: 'Driver added successfully',
+      };
+    } catch (error: any) {
+      if (error.response) {
+        // Not in 200 range
+        console.log(error.response.data);
+        return {
+          success: false,
+          message: 'Error adding driver',
+        };
+      } else {
+        console.log(`Error: ${error.message}`);
+        return {
+          success: false,
+          message: 'Unknown error adding driver',
+        };
+      }
+    }
+  }
+
   return {
     getAll,
     getById,
     getByName,
+    addDriver,
   };
 })();
 

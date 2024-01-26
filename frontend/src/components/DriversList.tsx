@@ -3,7 +3,7 @@ import DriversService from '../services/DriversService';
 import DriverItem from './DriverItem';
 
 export interface Driver {
-  id: number;
+  id?: number;
   name: string;
   age: number;
   nationality: string;

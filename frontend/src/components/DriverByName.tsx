@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Driver } from './DriversList';
 import DriversService from '../services/DriversService';
 import DriverItem from './DriverItem';
@@ -12,8 +12,6 @@ const DriverByName = () => {
     nationality: 'test',
     image: 'test',
   });
-
-  useEffect(() => {}, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setSearchInput(event.target.value);
