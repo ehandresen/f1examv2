@@ -7,35 +7,7 @@ const AddDriver = () => {
   const [age, setAge] = useState<number>(0);
   const [nationality, setNationality] = useState<string>('');
   const [image, setImage] = useState<string>('');
-  const [newDriver, setNewDriver] = useState<Driver>({
-    name: 'test',
-    age: 0,
-    nationality: 'test',
-    image: 'test',
-  });
-
-  useEffect(() => {
-    // This useEffect will run whenever newDriver changes
-    async function addDriverToService() {
-      try {
-        const result = await DriversService.addDriver(newDriver);
-        console.log(result);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    // Check if any of the properties in newDriver have changed
-    const hasDriverChanged =
-      newDriver.name !== 'test' ||
-      newDriver.age !== 0 ||
-      newDriver.nationality !== 'test' ||
-      newDriver.image !== 'test';
-
-    if (hasDriverChanged) {
-      addDriverToService();
-    }
-  }, [newDriver]);
+  const [newDriver, setNewDriver] = useState<Driver | null>(null);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     switch (event.target.name) {
@@ -44,8 +16,7 @@ const AddDriver = () => {
         break;
       case 'age': {
         // convert to number
-        const inputValue = event.target.value;
-        const number = parseInt(inputValue);
+        const number = parseInt(event.target.value);
 
         if (!isNaN(number)) {
           setAge(number);
@@ -61,14 +32,35 @@ const AddDriver = () => {
     }
   }
 
-  async function handleClick() {
-    setNewDriver((prevDriver) => ({
-      ...prevDriver,
+  function handleClick() {
+    // Create a new driver object with the current input values
+    const driver: Driver = {
       name: name,
       age: age,
       nationality: nationality,
       image: image,
-    }));
+    };
+
+    // Set the new driver in the state
+    setNewDriver(driver);
+  }
+
+  useEffect(() => {
+    // Check if newDriver is not null (meaning a new driver has been set)
+    if (newDriver !== null) {
+      // Call the asynchronous function to add the new driver
+      addDriverToService(newDriver);
+    }
+  }, [newDriver]);
+
+  async function addDriverToService(driver: Driver) {
+    try {
+      const result = await DriversService.addDriver(driver);
+
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
