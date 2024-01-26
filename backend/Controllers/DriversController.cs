@@ -92,4 +92,22 @@ public class DriversController : ControllerBase
         }
     }
 
+    [HttpPut]
+    public async Task<ActionResult<Driver>> Put(Driver updatedDriver)
+    {
+        try
+        {
+            context.Entry(updatedDriver).State = EntityState.Modified;
+
+            await context.SaveChangesAsync();
+
+            return Ok();
+
+        }
+        catch
+        {
+            return StatusCode(500);
+        }
+    }
+
 }
