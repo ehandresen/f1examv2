@@ -1,35 +1,36 @@
 import { useEffect, useState } from 'react';
 import { Driver } from './DriversList';
-import axios from 'axios';
+import DriversService from '../services/DriversService';
+import DriverItem from './DriverItem';
 
 const DriverByName = () => {
   const [searchInput, setSearchInput] = useState<string>('');
+  const [driver, setDriver] = useState<Driver>({
+    id: 0,
+    name: 'test',
+    age: 0,
+    nationality: 'test',
+    image: 'test',
+  });
 
-  useEffect(() => {
-    const getDriverFromService = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5155/api/driver/$${'verstappen'}`
-        );
-
-        return response.data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    const result = getDriverFromService();
-  }, []);
+  useEffect(() => {}, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setSearchInput(event.target.value);
 
+  async function handleClick() {
+    const driverFromService = await DriversService.getByName(searchInput);
+
+    setDriver(driverFromService);
+  }
+
   return (
     <>
       <h3>Search by Name</h3>
-      <label htmlFor="search-name">Search</label>
+      <label htmlFor="search-name">Name: </label>
       <input type="text" id="search-name" onChange={handleChange} />
-      <div>{result}</div>
+      <button onClick={handleClick}>Search</button>
+      <DriverItem driver={driver} />
     </>
   );
 };
