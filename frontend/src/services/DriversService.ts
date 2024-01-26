@@ -69,12 +69,33 @@ const DriversService = (() => {
   }
 
   //TODO editDriver
+  async function updateDriver(updatedDriver: Driver) {
+    try {
+      await axios.put(driversController, updatedDriver);
+
+      return {
+        success: true,
+        message: 'Driver updated successfully',
+      };
+    } catch (error: any) {
+      if (error.response) {
+        console.log(error.response.data);
+        return {
+          success: false,
+          message: 'Error updating driver',
+        };
+      } else {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+  }
 
   return {
     getAll,
     getById,
     getByName,
     addDriver,
+    updateDriver,
   };
 })();
 
