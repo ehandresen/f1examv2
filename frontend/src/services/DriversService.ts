@@ -101,7 +101,7 @@ const DriversService = (() => {
       if (error.response) {
         return {
           success: false,
-          message: 'Error deleting driver',
+          message: `Error deleting driver with id: ${id}`,
         };
       } else {
         console.log(`Error: ${error.message}`);

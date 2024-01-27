@@ -1,4 +1,5 @@
 import AddDriver from './components/AddDriver';
+import DeleteDriver from './components/DeleteDriver';
 import DriverById from './components/DriverById';
 import DriverByName from './components/DriverByName';
 import DriversList from './components/DriversList';
@@ -18,6 +19,9 @@ function App() {
       <DriverByName />
       <hr />
       <AddDriver />
+      <hr />
+
+      <DeleteDriver />
     </div>
   );
 }
