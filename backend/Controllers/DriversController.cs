@@ -9,7 +9,6 @@ namespace backend.Controllers;
 [Route("api/[controller]")]
 public class DriversController : ControllerBase
 {
-
     private readonly MyContext context;
 
     public DriversController(MyContext _context)
@@ -28,8 +27,6 @@ public class DriversController : ControllerBase
                 return NotFound("No drivers found in database");
 
             return Ok(drivers);
-
-
         }
         catch
         {
@@ -102,7 +99,6 @@ public class DriversController : ControllerBase
             await context.SaveChangesAsync();
 
             return Ok();
-
         }
         catch
         {
@@ -125,13 +121,11 @@ public class DriversController : ControllerBase
             await context.SaveChangesAsync();
 
             return NoContent(); // 204
-
         }
         catch
         {
             return StatusCode(500);
         }
     }
-
 
 }

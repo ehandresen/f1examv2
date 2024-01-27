@@ -89,7 +89,25 @@ const DriversService = (() => {
     }
   }
 
-  //TODO DELETE
+  async function deleteDriver(id: number) {
+    try {
+      await axios.delete(`${driversController}/${id}`);
+
+      return {
+        success: true,
+        message: 'Driver deleted successfully',
+      };
+    } catch (error: any) {
+      if (error.response) {
+        return {
+          success: false,
+          message: 'Error deleting driver',
+        };
+      } else {
+        console.log(`Error: ${error.message}`);
+      }
+    }
+  }
 
   return {
     getAll,
@@ -97,6 +115,7 @@ const DriversService = (() => {
     getByName,
     addDriver,
     updateDriver,
+    deleteDriver,
   };
 })();
 
