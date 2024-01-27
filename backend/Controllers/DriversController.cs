@@ -110,4 +110,28 @@ public class DriversController : ControllerBase
         }
     }
 
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        try
+        {
+            Driver? driver = await context.Drivers.FindAsync(id);
+
+            if (driver is null)
+                return NotFound($"No driver with id: {id}");
+
+            context.Drivers.Remove(driver);
+            await context.SaveChangesAsync();
+
+            return NoContent(); // 204
+
+        }
+        catch
+        {
+            return StatusCode(500);
+        }
+    }
+
+
 }

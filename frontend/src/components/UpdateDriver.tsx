@@ -101,7 +101,7 @@ const UpdateDriver = () => {
       <input
         name="age"
         type="text"
-        placeholder={driver?.age}
+        placeholder={driver?.age.toString()} // typescript expects 'placeholder' property to be of type 'string'
         onChange={handleInputChange}
       />
       <input

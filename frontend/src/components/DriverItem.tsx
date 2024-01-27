@@ -2,7 +2,7 @@ import { Driver } from './DriversList';
 import { FC } from 'react';
 
 interface ItemProps {
-  driver: Driver;
+  driver: Driver | null;
   onRemove?: (driver: Driver) => void;
 }
 
