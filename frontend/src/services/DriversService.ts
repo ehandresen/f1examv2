@@ -68,7 +68,6 @@ const DriversService = (() => {
     }
   }
 
-  //TODO editDriver
   async function updateDriver(updatedDriver: Driver) {
     try {
       await axios.put(driversController, updatedDriver);
